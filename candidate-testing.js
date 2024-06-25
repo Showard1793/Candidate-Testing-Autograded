@@ -45,12 +45,25 @@ function gradeQuiz(candidateAnswers) {
 } else {
   console.log("That is wrong.");
 } */
-for (i = 0; i < questions.length; i++){
-  console.log(`You anwsered ${candidateAnswers[i]}. The correct anwser is "${correctAnswers[i]}"`);
-  }
+  for (i = 0; i < questions.length; i++){
+    console.log(`You anwsered ${candidateAnswers[i]}. The correct anwser is "${correctAnswers[i]}"`);
+    }
+  
+ let points = 0 
+ let totalPoints = questions.length 
+ 
+ for (let i = 0; i < candidateAnswers.length; i++) {
+ if (candidateAnswers[i].toLowerCase() === correctAnswers[i].toLowerCase()){
+    points++
+ }
+ }
 
-let grade;  //TODO 3.2 use this variable to calculate the candidates score.
-
+let grade = ((points/totalPoints) * 100);;  //TODO 3.2 use this variable to calculate the candidates score.
+if (grade >= 80){
+  console.log(`Congratulations! You passed with a score of ${grade}%`);
+} else {
+  console.log(`I am sorry, but you have failed with a score of ${grade}%. Study more and try again later.`);
+}
 
   return grade;
 }
