@@ -3,36 +3,47 @@ const input = require('readline-sync');
 // TODO 2: modify your quiz app to ask 5 questions //
 
 // TODO 1.1a: Define candidateName // 
+
 let candidateName = "";
+
 // TODO 1.2a: Define question, correctAnswer, and candidateAnswer //
+
 let question = "Who was the first American woman in space? ";
+
 let correctAnswer = "Sally Ride";
+
 let candidateAnswer = "";
 
-
 //TODO: Variables for Part 2
+
 let questions = ["Who was the first American woman in space? ",
 "True or false: 5 kilometer == 5000 meters? ",
 "(5 + 3)/2 * 10 = ? ",
 "Given the array [8, 'Orbit', 'Trajectory', 45], what entry is at index 2? ",
 "What is the minimum crew size for the ISS? "];
-let correctAnswers = ["Sally Ride","true","40","Trajectory","3"]
+
+let correctAnswers = ["Sally Ride","true","40","Trajectory","3"];
+
 let candidateAnswers = [];
 
 function askForName() {
-  // TODO 1.1b: Ask for candidate's name //
+
+// TODO 1.1b: Ask for candidate's name //
+
 candidateName = input.question("What is your name? ");
 }
 
 function askQuestion() {
-  // TODO 1.2b: Ask candidate the question and assign the response as candidateAnswer //
+
+// TODO 1.2b: Ask candidate the question and assign the response as candidateAnswer //
 
 //REPLACED CODE
 // candidateAnswer =input.question(question);
+
 for (i = 0; i < questions.length; i++){
-  let candidateAnswer = input.question(questions[i]);
-  candidateAnswers.push(candidateAnswer);
-}  
+    let candidateAnswer = input.question(questions[i]);
+    candidateAnswers.push(candidateAnswer);
+    }  
 }
 
 function gradeQuiz(candidateAnswers) {
@@ -45,25 +56,39 @@ function gradeQuiz(candidateAnswers) {
 } else {
   console.log("That is wrong.");
 } */
+
   for (i = 0; i < questions.length; i++){
-    console.log(`You anwsered ${candidateAnswers[i]}. The correct anwser is "${correctAnswers[i]}"`);
+
+//Deletes "space" after question marks when giving feedback
+    questions[i] = questions[i].split("? ").join("?"); 
+
+//Provides user feedback
+    console.log(`You answered "${candidateAnswers[i]}" to the question: "${questions[i]}" The correct answer is "${correctAnswers[i]}"`);
     }
-  
+
+//Initialize starting points to "0" and total points to questions.length
+
  let points = 0 
+
  let totalPoints = questions.length 
  
- for (let i = 0; i < candidateAnswers.length; i++) {
- if (candidateAnswers[i].toLowerCase() === correctAnswers[i].toLowerCase()){
-    points++
- }
- }
+//Tally Points
 
-let grade = ((points/totalPoints) * 100);;  //TODO 3.2 use this variable to calculate the candidates score.
+ for (let i = 0; i < candidateAnswers.length; i++) {
+    if (candidateAnswers[i].toLowerCase() === correctAnswers[i].toLowerCase()){
+    points++
+        }
+    }
+
+//TODO 3.2 use this variable to calculate the candidates score.
+
+let grade = ((points/totalPoints) * 100);;  
+
 if (grade >= 80){
-  console.log(`Congratulations! You passed with a score of ${grade}%`);
-} else {
-  console.log(`I am sorry, but you have failed with a score of ${grade}%. Study more and try again later.`);
-}
+    console.log(`Congratulations! You passed with a score of ${grade}%`);
+    } else {
+    console.log(`I am sorry, but you have failed with a score of ${grade}%. Study more and try again later.`);
+    }
 
   return grade;
 }
